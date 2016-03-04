@@ -135,3 +135,35 @@ Windows Formsは.NET Frameworkのリリース時からあるプラットフォ�
 
 `InitializeComponent`メソッドではその名のとおり、「フォーム デザイナー」で配置、設定したコントロールを含む各種コンポーネントの初期化処理を行っています。その中を見ると、確かに`label1`フィールドの`Text`プロパティに、"Hello World!"を設定していることが分かります（図1-12）。
 
+
+### フォームの表示
+
+このようにして定義したフォーム型ですが、画面に表示するにはそのインスタンスを作成してやる必要があります。その役目を行っているのが、プロジェクト内にフォームとは別にもう一つ既定で作成される`Program.cs`ファイルで定義された`Program`型です。
+
+Windows Formsアプリケーションでは、実行時に既定で`Program`型の`Main`メソッドを実行するようになっており、ここでフォーム型のインスタンスを作成し、表示しています（リスト1-1）。
+
+リスト1-1 Mainメソッド
+
+```
+namespace HelloWorld
+{
+    static class Program
+    {
+        /// <summary>
+        /// アプリケーションのメイン エントリ ポイントです。
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());  // ★
+        }
+    }
+}
+```
+
+
+コード内の★マークコメント箇所が、フォーム型のインスタンスを作成しているところです。フォーム型のインスタンスを`System.Windows.Forms.Application`型の`Run`静的メソッドに渡して実行することで、そのフォームを使ったアプリケーションが起動し、画面が表示されます。そして、画面を閉じると、フォームインスタンスが破棄され、アプリケーションも終了することとなっています。
+
+以上で、Windows Formsアプリケーションの作り方とその仕組みを簡単に理解できたと思います。次の章からは、実用的なアプリケーションを作成するためにはどのようにプログラミングを進めていくのか学んでいきましょう。
