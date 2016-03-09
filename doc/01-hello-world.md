@@ -144,7 +144,7 @@ Windows Formsアプリケーションでは、実行時に既定で`Program`型�
 
 リスト1-1 Mainメソッド
 
-```
+```csharp
 namespace HelloWorld
 {
     static class Program
