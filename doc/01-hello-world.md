@@ -1,4 +1,4 @@
-Hello World!
+第１章 Hello World!
 =====
 
 [↑目次](..\README.md "目次")
@@ -142,7 +142,7 @@ Windows Formsは.NET Frameworkのリリース時からあるプラットフォ�
 
 Windows Formsアプリケーションでは、実行時に既定で`Program`型の`Main`メソッドを実行するようになっており、ここでフォーム型のインスタンスを作成し、表示しています（リスト1-1）。
 
-リスト1-1 Mainメソッド
+リスト1-1 `Main`メソッド（`Program.cs`より）
 
 ```csharp
 namespace HelloWorld
