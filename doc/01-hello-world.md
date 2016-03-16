@@ -1,4 +1,4 @@
-第１章 Hello World!
+第1章 Hello World!
 =====
 
 [↑目次](..\README.md "目次")
