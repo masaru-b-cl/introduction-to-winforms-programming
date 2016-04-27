@@ -18,6 +18,7 @@ Controlクラスは前章で紹介した`Text`プロパティのような基本�
 ### プロパティ
 
 #### 見た目に関するもの
+
 | 名前  | 説明 |
 | --- | --- |
 | BackColor（バックカラー） | 背景色を指定する |
@@ -200,7 +201,7 @@ private void radioButton_CheckedChanged(object sender, EventArgs e)
 
 #### ListBox（リストボックス）コントロール
 
-いくつかの選択肢を同時に表示し、その中から任意のものを1つまたは複数選択させるためのコントロールがListBoxコントロールです（図4-12）。
+いくつかの選択肢を同時に表示し、その中から任意のものを1つまたは複数選択させるためのコントロールがListBox（リストボックス）コントロールです（図4-12）。
 
 ![ListBoxコントロール](../image/04-12.jpg)
 
@@ -302,7 +303,29 @@ SelectionModeプロパティは`System.Windows.Forms.SelectionMode`列挙体で�
 | 値 | 説明　|
 | --- | --- |
 | None | 選択不可 |
-| One | 一つだけ選択可 |
+| One | 一つだけ選択可（既定値） |
 | MultiSimple | マウスを使って複数選択可 |
 | MultiExtended | マウス及びCtrlキー、Shiftキー、カーソルキーを使って複数選択可 |
+
+#### ComboBox（コンボボックス）コントロール
+
+ドロップダウン形式のリストボックス、もしくは直接入力で選択肢を1つ選択させるためのコントロールがComboBox（コンボボックス）コントロールです（図4-16）。選択肢の設定方法や、選択された項目の判定方法などはListBoxコントロールと同様に行えます。
+
+![ComboBoxコントロール](../image/04-16.jpg)
+
+図4-16 ComboBoxコントロール
+
+ComboBoxコントロールの項目をどのように選択させるかは、DropDownStyle（ドロップダウンスタイル）プロパティで設定できます（図4-17）。
+
+![DropDownStyleプロパティ](../image/04-17.jpg)
+
+図4-17 DropDownStyleプロパティ
+
+DropDownStyleプロパティは`System.Windows.Forms.ComboBoxStyle`列挙体で、その値は次のものが選べます。
+
+| 値 | 説明　|
+| --- | --- |
+| DropDown | テキスト入力と下向三角（▼）ボタンをクリックして表示される「ドロップダウンリスト」で選択（既定値） |
+| DropDownList | テキスト入力できず、ドロップダウンリストでのみ選択 |
+| Simple | テキスト入力とリストボックスで選択 |
 
