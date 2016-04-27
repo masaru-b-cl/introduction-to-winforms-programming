@@ -142,3 +142,27 @@ private void textBox1_TextChanged(object sender, EventArgs e)
 ![入力文字数が5文字を超えた際のメッセージ](../image/04-06.jpg)
 
 図4-6 入力文字数が5文字を超えた際のメッセージ
+
+#### CheckBox（チェックボックス）コントロール
+
+ユーザーにチェックオン／オフで選択させるためのコントロールがCheckBox（チェックボックス）コントロールです（図4-7）。
+
+![CheckBoxコントロール](../image/04-07.jpg)
+
+図4-7 CheckBoxコントロール
+
+CheckBoxのチェックオン／オフの状態は、Checked（チェックド）プロパティ（bool型）で取得、設定します。また、チェックオン／オフの切り替えのタイミングで何か処理を行いたい場合は、CheckedChanged（チェックドチェンジド）イベントを使用します（リスト4-3、図4-8）。
+
+リスト4-3 CheckedChangedイベントハンドラー（`Form1.cs`より）
+
+```csharp
+private void checkBox1_CheckedChanged(object sender, EventArgs e)
+{
+    MessageBox.Show("チェック" + (checkBox1.Checked ? "オン" : "オフ"));
+}
+```
+
+![チェック状態を変更時に表示（チェックオン）](../image/04-08-01.jpg) ![チェック状態を変更時に表示（チェックオフ）](../image/04-08-02.jpg)
+
+図4-8 チェック状態を変更時に表示
+
