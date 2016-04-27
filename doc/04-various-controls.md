@@ -410,3 +410,18 @@ BorderStyleプロパティは`System.Windows.Forms.BorderStyle`列挙体で、�
 ![GroupBoxコントロール](../image/04-25.jpg)
 
 図4-25 GroupBoxコントロール
+
+#### TabControl（タブコントロール）コントロール
+
+複数ページを「タブ」で切り替えることのできるコンテナーです（図4-26）。タブのそれぞれのページは、「TabPage（タブページ）」コントロールとして追加し、このTabPageコントロールが実際のコンテナーになります。
+
+![TabControlコントロール](../image/04-26.jpg)
+
+図4-26 TabControlコントロール
+
+タブの追加、削除などは、「プロパティ ウィンドウ」のTabPages（タブページス）プロパティに表示されるボタンを押して表示される、「TabPage コレクション エディター」から行います（図4-27）。
+
+![TabPagesプロパティ](../image/04-27-01.jpg)![TabPage コレクション エディター](../image/04-27-02.jpg)
+
+図4-27 TabPage コレクション エディター
+
