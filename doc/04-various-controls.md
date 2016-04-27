@@ -72,18 +72,19 @@ Controlクラスは前章で紹介した`Text`プロパティのような基本�
 
 
 - コモン コントロール
-    - `Label`（ラベル）
-    - `Button`（ボタン）
-    - `TextBox`（テキストボックス）
-    - `CheckBox`（チェックボックス）
-    - `RadioButton`（ラジオボタン）
-    - `ListBox`（リストボックス）
-    - `ComboBox`（コンボボックス）
+    - Label（ラベル）
+    - Button（ボタン）
+    - TextBox（テキストボックス）
+    - CheckBox（チェックボックス）
+    - RadioButton（ラジオボタン）
+    - ListBox（リストボックス）
+    - ComboBox（コンボボックス）
 - コンテナー コントロール
-    - `Panel`（パネル）
-    - `GroupBox`（グループボックス）
+    - Panel（パネル）
+    - GroupBox（グループボックス）
+    - TabControl（タブコントロール）
 - データコントロール
-    - `DataGridView`（データグリッドビュー）
+    - DataGridView（データグリッドビュー）
 
 ### コモン コントロール
 
@@ -375,3 +376,29 @@ DropDownStyleプロパティは`System.Windows.Forms.ComboBoxStyle`列挙体で�
 | DropDownList | テキスト入力できず、ドロップダウンリストでのみ選択 |
 | Simple | テキスト入力とリストボックスで選択 |
 
+### コンテナー コントロール
+
+「ツールボックス」ウィンドウの「コンテナー」タブに含まれるコントロールです。その名のとおり、他のコントロールを収めるためのコントロール群です。
+
+#### Panel（パネル）コントロール
+
+最も基本的なコンテナーで、「枠」を提供します（図4-23）。アプリケーション画面をヘッダー部、明細部のように分けたりする際によく使われます。また、枠線なしのPanelコントロールは、いくつかのRadioButtonコントロールをグループ化するためにも使われます。
+
+![Panelコントロール](../image/04-23.jpg)
+
+図4-23 Panelコントロール
+
+枠線の見た目はBorderStyle（ボーダースタイル）プロパティによって変更できます（図4-24）。
+
+![BorderStyleプロパティ](../image/04-24.jpg)
+
+
+図4-24 BorderStyleプロパティ
+
+BorderStyleプロパティは`System.Windows.Forms.BorderStyle`列挙体で、その値は次のものが選べます。
+
+| 値 | 説明　|
+| --- | --- |
+| None | なし（既定値） |
+| FixedSingle | 一重線 |
+| Fixed3D | 3D境界線 |
