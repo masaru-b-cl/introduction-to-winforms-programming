@@ -70,7 +70,7 @@ Controlクラスは前章で紹介した`Text`プロパティのような基本�
 なお、今回は次のコントロールを取り上げます。他のコントロールについては別途Web検索等で調べてください。
 
 
-- コモンコントロール
+- コモン コントロール
     - `Label`（ラベル）
     - `Button`（ボタン）
     - `TextBox`（テキストボックス）
@@ -78,15 +78,15 @@ Controlクラスは前章で紹介した`Text`プロパティのような基本�
     - `RadioButton`（ラジオボタン）
     - `ListBox`（リストボックス）
     - `ComboBox`（コンボボックス）
-- コンテナーコントロール
+- コンテナー コントロール
     - `Panel`（パネル）
     - `GroupBox`（グループボックス）
 - データコントロール
     - `DataGridView`（データグリッドビュー）
 
-### コモンコントロール
+### コモン コントロール
 
-「ツールボックス」ウィンドウの「コモンコントロール」タブに含まれるコントロールです。基本的なユーザーとの対話で用いられるコントロール群で、最も使用機会が多いものです。
+「ツールボックス」ウィンドウの「コモン コントロール」タブに含まれるコントロールです。基本的なユーザーとの対話で用いられるコントロール群で、最も使用機会が多いものです。
 
 #### Label（ラベル）コントロール
 
@@ -151,9 +151,9 @@ private void textBox1_TextChanged(object sender, EventArgs e)
 
 図4-7 CheckBoxコントロール
 
-CheckBoxのチェックオン／オフの状態は、Checked（チェックド）プロパティ（bool型）で取得、設定します。また、チェックオン／オフの切り替えのタイミングで何か処理を行いたい場合は、CheckedChanged（チェックドチェンジド）イベントを使用します（リスト4-3、図4-8）。
+CheckBoxコントロールのチェックオン／オフの状態は、Checked（チェックド）プロパティ（bool型）で取得、設定します。また、チェックオン／オフの切り替えのタイミングで何か処理を行いたい場合は、CheckedChanged（チェックドチェンジド）イベントを使用します（リスト4-3、図4-8）。
 
-リスト4-3 CheckedChangedイベントハンドラー（`Form1.cs`より）
+リスト4-3 CheckBoxコントロールのCheckedChangedイベントハンドラー（`Form1.cs`より）
 
 ```csharp
 private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -166,3 +166,34 @@ private void checkBox1_CheckedChanged(object sender, EventArgs e)
 
 図4-8 チェック状態を変更時に表示
 
+#### RadioButton（ラジオボタン）コントロール
+
+ユーザーにチェックオン／オフで選択させるためのコントロールがCheckBoxコントロールの他にもう一つあります。それがRadioButton（ラジオボタン）コントロールです（図4-9）。CheckBoxコントロールはコントロール単品でチェックオン／オフを選択するのに対して、RadioButtonでは、あるきまったいくつかの選択肢から、一つをチェックして選択させることが大きな違いです。
+
+![RadioButtonコントロール](../image/04-09.jpg)
+
+図4-9 RadioButtonコントロール
+
+チェックオン／オフの状態はCheckBoxコントロールと同様に、Checkedプロパティで取得、設定ができます。ただし、RadioButtonコントロールは後述する「コンテナー コントロール」内に配置した複数のコントロールの内、一つだけしかチェックできないことに注意が必要です。
+また、CheckedChangedイベントも、一つのRadioButtonコントロールのチェック状態を変更すると、関連する他のRadioButtonコントロールの分まで発生してしまいます。そのため、どのRadioButtonコントロールが選択されたかどうかは、それぞれのCheckedChangedイベントに共通のイベントハンドラーを登録し、イベントハンドラーの`sender`引数を使ってイベントが発生したコントロールがチェックされたかどうかを判定する必要があります（リスト4-4、図4-10、11）。
+
+リスト4-4 RadioButtonコントロールのCheckedChangedイベントハンドラー（`Form1.cs`より）
+
+```csharp
+private void radioButton_CheckedChanged(object sender, EventArgs e)
+{
+    var rb = sender as RadioButton;
+    if (rb.Checked)
+    {
+        MessageBox.Show(rb.Text);
+    }
+}
+```
+
+![RadioButtonのイベントハンドラー設定１](../image/04-10-01.jpg) ![RadioButtonのイベントハンドラー設定２](../image/04-10-02.jpg) ![RadioButtonのイベントハンドラー設定３](../image/04-10-03.jpg)
+
+図4-10 RadioButtonのイベントハンドラー設定
+
+![選択したRadioButtonのラベル表示１](../image/04-11-01.jpg) ![選択したRadioButtonのラベル表示２](../image/04-11-02.jpg) ![選択したRadioButtonのラベル表示３](../image/04-11-03.jpg)
+
+図4-11 選択したRadioButtonのラベル表示
