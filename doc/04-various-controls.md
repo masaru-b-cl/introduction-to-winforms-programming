@@ -402,3 +402,11 @@ BorderStyleプロパティは`System.Windows.Forms.BorderStyle`列挙体で、�
 | None | なし（既定値） |
 | FixedSingle | 一重線 |
 | Fixed3D | 3D境界線 |
+
+#### GroupBox（グループボックス）コントロール
+
+ラベル付きの枠を提供するコンテナーです（図4-25）。画面上の項目をその名のとおりグループ分けするために使います。もちろんRadioButtonコントロール用のコンテナーとしてもよく使われます。
+
+![GroupBoxコントロール](../image/04-25.jpg)
+
+図4-25 GroupBoxコントロール
