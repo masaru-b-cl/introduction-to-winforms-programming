@@ -163,9 +163,9 @@ private void RenderForm()
 
 ### データバインド用オブジェクト型定義
 
-ここではあくまでサンプルとして、カウントアップアプリでデータバインドを導入してみましょう。まず最初に、データバインドするオブジェクトの型を定義します（リスト5-5）。
+ここではあくまでサンプルとして、カウントアップアプリでデータバインドを導入してみましょう。まず最初に、データバインドするオブジェクトの型を定義します（リスト5-6）。
 
-リスト5-5 データバインドするオブジェクト型（`Form1.cs`より）
+リスト5-6 データバインドするオブジェクト型（`Form1.cs`より）
 
 ```csharp
 using System.ComponentModel;
@@ -248,5 +248,23 @@ namespace CountUp
 
 図5-9 CurretValueプロパティをデータバインド
 
+### データソースオブジェクト操作
 
+今度はデータバインド元である「データソース」オブジェクトを操作します。といっても難しい話ではなく、AppModel型オブジェクトをフィールドとして追加し、先ほど追加されたappModelBindingSourceコントロールのDataSourceオブジェクトに設定するだけです（リスト5-7）。こうしてやれば、あとはAppModel型フィールドのプロパティを変更すれば、画面の表示も勝手に書き換わります。
+
+リスト5-7 データソースオブジェクト操作（`Form1.cs`より）
+
+```csharp
+private AppModel model = new AppModel(initialValue: 1);
+
+private void Form1_Load(object sender, EventArgs e)
+{
+    appModelBindingSource.DataSource = model;
+}
+
+private void button1_Click(object sender, EventArgs e)
+{
+    model.CurrentValue++;
+}
+```
 
