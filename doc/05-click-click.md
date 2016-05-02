@@ -15,3 +15,39 @@
 ![カウントアップアプリ](../image/05-01.jpg)
 
 図5-1 カウントアップアプリ
+
+## コントロールのみの場合
+
+まずは、コントロールのみでこのアプリを作ってみましょう。新しいWindows Forms アプリケーションプロジェクト「CountUp」を作成し、ラベルとボタンを配置して位置やTextプロパティを設定しましょう（図5-2）。
+
+![コントロールの配置](../image/05-02.jpg)
+
+図5-2 コントロールの配置
+
+次に初期値を表示するため、Form.Loadイベントハンドラーを作成します（リスト5-1）。初期値は1なので、文字列で`"1"`をラベルのTextプロパティに設定します。
+
+リスト5-1 初期値表示（`Form1.cs`より）
+
+```csharp
+private void Form1_Load(object sender, EventArgs e)
+{
+    label1.Text = "1";
+}
+```
+
+今度はカウントアップを行うため、Button.Clickイベントハンドラーを作成します（リスト5-2）。まずラベルの表示テキストを整数型に変換して現在値を取得します。次に現在値をカウントアップし、ラベルに設定しなおします。
+
+リスト5-2 カウントアップ処理（`Form1.cs`より）
+
+```csharp
+private void button1_Click(object sender, EventArgs e)
+{
+    var currentValue = int.Parse(label1.Text);
+
+    currentValue++;
+
+    label1.Text = currentValue.ToString();
+}
+```
+
+以上で完成です。実行して動かしてみると、ボタンを押すたびに数値がカウントアップされることが確認できます。
