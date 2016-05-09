@@ -123,6 +123,128 @@ ErrorProviderコンポーネントは、ツールボックスの「コンポー�
 
 図6-4 ErrorProviderコンポーネントの配置
 
+### 業務エラーの判定手順
+
+前述のとおり、業務エラーにはいくつが種類があります。これらのエラーチェックをばらばらに行うと、どこでどのようなエラーが発生したかわかりにくくなりますし、エラー判定条件の変更への対応が難しくなってしまいます。
+
+こういった問題を避けるため、業務エラーの判定は次のような順で行うとよいでしょう。
+
+1. 項目チェック
+    1. 項目単体チェック
+    2. 項目組合せチェック
+2. 突き合わせチェック
+
+ここでもう一つのポイントとして、「項目チェック」を終えた段階でエラーがあれば、そこで中断することを勧めます。つまり、ユーザーの入力内容のみで問題がないときだけ、外部に依存する突き合わせチェックを行うのです。
+
+こうすることで、余計な外部アクセスを抑制してパフォーマンス上にも有利になりますし、判定処理の役割も分かれて見通しがよくなります（リスト6-3）。
+
+リスト6-3 エラー判定処理（`Form1.cs`より）
+
+```csharp
+private bool ValidateForm()
+{
+    CrearErrors();
+
+    // ■項目エラーチェック
+
+    // □項目単体チェック
+    var hasItemError = false;
+
+    // タスク名
+    if (string.IsNullOrEmpty(taskNameTextBox.Text))
+    {
+        errorProvider.SetError(taskNameTextBox, "タスク名を入力してください。");
+        hasItemError = true;
+    }
+
+    // 期間開始日
+    DateTime? dueFrom;
+    var dueFromIsValid = TryParseDate(dueFromTextBox.Text, out dueFrom);
+    if (dueFromIsValid == false)
+    {
+        errorProvider.SetError(dueFromTextBox, "期間開始日に日付を入力してください。");
+        hasItemError = true;
+    }
+
+    // 期間終了日
+    DateTime? dueTo;
+    var dueToIsValid = TryParseDate(dueToTextBox.Text, out dueTo);
+    if (dueToIsValid == false)
+    {
+        errorProvider.SetError(dueToTextBox, "期間終了日に日付を入力してください。");
+        hasItemError = true;
+    }
+
+    // □項目組合せチェック
+    // 期間
+    if (dueFrom.HasValue && dueTo.HasValue)
+    {
+        // 開始、終了日とも入力あり
+        if (dueTo.Value < dueFrom.Value)
+        {
+            // 終了日が開始日より前
+            ShowErrorMessage("期間終了日には開始日以降の日付を入力してください。");
+            hasItemError = true;
+        }
+    }
+    else
+    {
+        if (dueFromIsValid && dueToIsValid &&
+            (dueFrom.HasValue || dueTo.HasValue))
+        {
+            // 開始、終了日の一方のみ入力あり
+            ShowErrorMessage("期間を入力する場合、開始日と終了日の両方を入力してください。");
+            hasItemError = true;
+        }
+    }
+
+    if (hasItemError)
+    {
+        // 項目チェックエラーあり
+        return false;
+    }
+
+    // ■突き合わせチェック
+    if (string.IsNullOrEmpty(attachmentFilePathTextBox.Text) == false &&
+        File.Exists(attachmentFilePathTextBox.Text) == false)
+    {
+        // 開始、終了日の一方のみ入力あり
+        ShowErrorMessage($@"添付ファイル{attachmentFilePathTextBox.Text}がありません。
+存在するファイルパスを入力してください。");
+        return false;
+    }
+
+    return true;
+}
+```
+
+このようにエラー判定処理をメソッドにしておけば、登録等の処理の見通しもよくなります（リスト6-4）。
+
+リスト6-4 登録処理（`Form1.cs`より）
+
+```csharp
+private void registerButton_Click(object sender, EventArgs e)
+{
+    // エラーチェック
+    var isValid = ValidateForm();
+
+    if (isValid == false)
+    {
+        // 業務エラーあり
+        return;
+    }
+
+    // 登録処理実行
+
+    MessageBox.Show("タスクを登録しました。");
+
+    ClearForm();
+
+    SetInitialFocus();
+}
+```
+
+
 ## システムエラー
 
 ### 例外処理
