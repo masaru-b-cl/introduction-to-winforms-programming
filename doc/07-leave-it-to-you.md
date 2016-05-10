@@ -66,14 +66,16 @@ using (var searchProductDialog = new SearchProductDialog(productCode: productCod
 リスト7-2 親画面からの情報受け取り（`SearchProductDialog.cs`より）
 
 ```csharp
+private readonly string productCode;
+
 public SearchProductDialog(string productCode) : this()
 {
-    ProductCode = productCode;
+    this.productCode = productCode;
 }
 
 private void SearchProductForm_Load(object sender, EventArgs e)
 {
-    productCodeTextBox.Text = ProductCode;
+    productCodeTextBox.Text = productCode;
 
     FilterProducts(productCodeTextBox.Text);
 }
@@ -113,8 +115,6 @@ DialogResultプロパティの設定方法は、ボタンクリックイベン�
 
 ```csharp
 public Product SelectedProduct { get; private set; }
-
-...（略）...
 
 private void okButton_Click(object sender, EventArgs e)
 {
@@ -176,4 +176,4 @@ searchProductDialog.productCodeTextBox.Text = this.productCodeTextBox.Text;
 
 図7-5 親子画面の参照関係
 
-
+子画面のモーダル表示のやり方と、注意すべきことについて学びました。次の章ではモードレス表示の場合について学びます。
