@@ -105,7 +105,44 @@ DialogResultプロパティの設定方法は、ボタンクリックイベン�
 
 ## 子画面の情報の取得
 
-子画面で処理を行った後必要な情報を得るには、子画面の読取専用プロパティを用います。
+子画面の処理がOKなら、子画面から情報を得たいケースがよくあります。例えば、今回のサンプルのように、子画面で検索した後、選択したデータの情報を親画面に表示する、といったものです。
+
+子画面から必要な情報を得るには、子画面の読取専用プロパティを用います（リスト7-4）。
+
+リスト7-4 子画面の情報公開（`SearchProductDialog.cs`より）
+
+```csharp
+public Product SelectedProduct { get; private set; }
+
+...（略）...
+
+private void okButton_Click(object sender, EventArgs e)
+{
+    var selectedProductCode = productDataGridView.CurrentRow?.Cells?[0]?.Value as string;
+
+    if (string.IsNullOrEmpty(selectedProductCode))
+    {
+        return;
+    }
+
+    SelectedProduct = products.First(product => product.Code == selectedProductCode);
+}
+```
+
+サンプルでは、OKボタンをクリックした際、グリッドで選択した商品情報を探し、読取専用プロパティSelectedProductに設定しています。
+
+呼び出し側では、子画面を開いた時のusingブロック内で（つまりはDisposeメソッドが呼ばれる前に）このプロパティにアクセスします（リスト7-5）。
+
+リスト7-5 子画面から情報取得（`MainForm.cs`の商品検索ボタンクリックハンドラーより）
+
+```csharp
+var selectedProduct = searchProductDialog.SelectedProduct;
+
+productCodeTextBox.Text = selectedProduct.Code;
+productNameTextBox.Text = selectedProduct.Name;
+```
+
+サンプルでは選択した商品情報から、コードと名前をメイン画面に表示しています。
 
 ## 子画面から親画面は触らない
 
