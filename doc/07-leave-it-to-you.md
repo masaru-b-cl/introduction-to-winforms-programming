@@ -59,6 +59,28 @@ using (var searchProductDialog = new SearchProductDialog(productCode: productCod
 }
 ```
 
+### 子画面への情報受け渡し
+
+リスト7-1を見ると分かるのですが、親画面から子画面に情報を渡したいときは、子画面のコンストラクターで必要な情報を受け渡すのが一般的です。子画面側ではコンストラクターで必要な情報を受け取った後、Loadイベントハンドラーでその情報を使って処理を行います（リスト7-2）。サンプルでは親画面から受け取った商品コードを画面に設定し、絞り込み処理を実行しています。
+
+リスト7-2 親画面からの情報受け取り（`SearchProductDialog.cs`より）
+
+```csharp
+public SearchProductDialog(string productCode) : this()
+{
+    ProductCode = productCode;
+}
+
+private void SearchProductForm_Load(object sender, EventArgs e)
+{
+    productCodeTextBox.Text = ProductCode;
+
+    FilterProducts(productCodeTextBox.Text);
+}
+```
+
+あくまでコンストラクターはインスタンスを作る役割に徹して、実際の処理はイベントハンドラーに任せることで、処理の複雑化を防ぐことができます。
+
 ## 子画面の処理結果の判定
 
 モーダル表示する際に呼び出したShowDialogメソッドの戻り値であるDialogResult構造体の値を判定する。
