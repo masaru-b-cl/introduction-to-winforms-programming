@@ -73,5 +73,38 @@ private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 
 ## 子画面への受け渡し
 
-設定専用プロパティ
+モードレス表示で子画面を表示しているときは、親画面側の操作を元に、子画面の操作を行うことがよくあります。例えば、サンプルではメイン画面リストボックスで選択した商品が変わったら、その情報を商品情報表示画面に反映しています。
+
+こういった場合、子画面への情報受け渡しには、設定専用プロパティを用いるとよいでしょう（リスト8-3）。
+
+リスト8-3 子画面への情報設定（`MainForm.cs`より）
+
+```csharp
+private void productBindingSource_CurrentChanged(object sender, EventArgs e)
+{
+    productForm.Product = productBindingSource.Current as Product;
+}
+```
+
+子画面側では、プロパティに設定されたら、受け取った情報をもとに画面に反映します（リスト8-4）。
+
+リスト8-4 子画面での設定情報利用（`ProductForm.cs`より）
+
+```csharp
+public Product Product
+{
+    set
+    {
+        productCodeTextBox.Text = value.Code;
+        productNameTextBox.Text = value.Name;
+        makerNameTextBox.Text = value.MakerName;
+    }
+}
+```
+
+なお、子画面側で入力した情報をもとに親画面を変更したい、といったケースもあるでしょう。こういったときでも、モーダル表示のところで説明した通り、子画面から親画面を操作してはいけません。
+
+ではどうすればよいかというと、子画面側に独自のイベントを追加し、親画面側でそのイベントハンドラーを定義して処理すればよいのです。こうすることで、子画面は親画面のことは知らなくとも、子画面から親画面側に通知することができます。あとは、イベント引数や子画面の読取専用プロパティを通じて情報を取得し、親画面に反映させます。
+
+具体的なコードについては省きますが、循環参照にならないようにするテクニックとして覚えておいてください。
 
