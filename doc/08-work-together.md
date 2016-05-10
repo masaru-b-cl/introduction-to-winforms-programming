@@ -28,9 +28,48 @@
 
 ## モードレス表示
 
-Showメソッド
-親画面にインスタンスを保持する必要あり
-親画面を閉じたら一緒に閉じる
+子画面をモードレス表示するには、対象となる画面のフォームクラスのインスタンスを作成し、そのShowメソッドを呼び出します。このとき、子画面のインスタンスをローカル変数として宣言すると、メソッド終了時に変数が破棄され、子画面がすぐに閉じてしまいます。したがって、子画面は親画面などのフィールドとして保持する必要があります（リスト8-1）。
+w
+
+
+リスト8-1 モードレス表示（`MainForm.cs`より）
+
+```csharp
+private ProductForm productForm;
+
+private void MainForm_Load(object sender, EventArgs e)
+{
+    productForm = new ProductForm
+    {
+        StartPosition = FormStartPosition.Manual,
+        Left = this.Left + this.Width + 20,
+        Top = this.Top
+    };
+
+    FilterProducts(productNameTextBox.Text);
+}
+
+private void MainForm_Shown(object sender, EventArgs e)
+{
+    productForm.Show();
+}
+```
+
+サンプルではアプリケーション起動時にメイン画面と一緒に商品情報表示画面を開くため、まず親画面のLoadイベントハンドラーで子画面のインスタンスを作成（および初期位置設定）してフィールドに格納します。次に、親画面表示時に発生するShown（ショウン）イベントハンドラーにて、子画面インスタンスのShowメソッドを呼び出して、子画面を表示しています。
+
+子画面のインスタンスはフィールドとして保持しているため、親画面を閉じるときに一緒に閉じる必要があります。そのため、親画面を閉じるときに発生するFormClosing（フォームクロージング）イベントにて、子画面インスタンスのClose（クローズ）メソッドを呼び出し、子画面を閉じるようにします（リスト8-2）。
+
+リスト8-2 子画面を閉じる（`MainForm.cs`より）
+
+```csharp
+private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+{
+    productForm?.Close();
+}
+```
+
+なお、子画面インスタンスのHide（ハイド）メソッドを呼び出すことで、画面を閉じるのではなく「隠す」こともできます。画面の状態を残したまま、一時的に画面を見えなくするようなときには、こちらのメソッドを使いましょう。再度画面を表示するには、Showメソッドを呼び出せばよいです。ただしこのとき、Shownイベントが発生するので、画面を初めて表示したときに行いたい処理は、ShownイベントハンドラーではなくLoadイベントハンドラーに書くようにしましょう。
+
 
 ## 子画面への受け渡し
 
