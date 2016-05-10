@@ -81,9 +81,27 @@ private void SearchProductForm_Load(object sender, EventArgs e)
 
 あくまでコンストラクターはインスタンスを作る役割に徹して、実際の処理はイベントハンドラーに任せることで、処理の複雑化を防ぐことができます。
 
-## 子画面の処理結果の判定
+### 子画面の処理結果の判定
 
-モーダル表示する際に呼び出したShowDialogメソッドの戻り値であるDialogResult構造体の値を判定する。
+子画面での処理結果を判定するには、子画面のフォームクラスのDialogResultプロパティを使います。このプロパティの型はSystem.Windows.Forms.DialogResult構造体で、OKやキャンセルといった処理結果を表します。
+
+このDialogResultプロパティをモーダル表示された画面の結果を子画面側で設定すると、呼び出し元である親画面ではShowDialogメソッドの戻り値として参照することができます（リスト7-3）。これを利用して、OKの時だけ処理を行う、といったことが実現できます。
+
+リスト7-3 DialogResult参照（`MainForm.cs`の商品検索ボタンクリックハンドラーより）
+
+```csharp
+var result = searchProductDialog.ShowDialog();
+if (result == DialogResult.OK)
+{
+    ...（略）...
+}
+```
+
+DialogResultプロパティの設定方法は、ボタンクリックイベントハンドラーなどでコードから直接設定する方法の他、ButtonコントロールのDialogResultプロパティにデザイナーから設定しておけば、そのButtonコントロールをクリックすると自動的にフォームのDialogResultプロパティに設定されます（図7-4）。
+
+![ボタンへのDialogResult設定](../image/07-04.jpg)
+
+図7-4 ボタンへのDialogResult設定
 
 ## 子画面の情報の取得
 
