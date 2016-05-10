@@ -48,11 +48,16 @@
 
 ## モーダル表示
 
-子画面をモーダル表示するには、FormクラスのShowDialogメソッドを呼び出します。
+子画面をモーダル表示するには、対象となる画面のFormクラスのインスタンスを作成し、そのShowDialogメソッドを呼び出します（リスト7-1）。このとき、FormクラスはIDisposableインターフェースを実装しているので、using構文を使って必ずDisposeが呼ばれるようにしてください。
 
-## 子画面への情報受け渡し
+リスト7-1 モーダル表示（`MainForm.cs`の商品検索ボタンクリックハンドラーより）
 
-子画面のフォームインスタンスを作る際、コンストラクターで必要な情報を受け渡します。
+```csharp
+using (var searchProductDialog = new SearchProductDialog(productCode: productCodeTextBox.Text))
+{
+    ...（略）...
+}
+```
 
 ## 子画面の処理結果の判定
 
