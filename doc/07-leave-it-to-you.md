@@ -177,3 +177,5 @@ searchProductDialog.productCodeTextBox.Text = this.productCodeTextBox.Text;
 図7-5 親子画面の参照関係
 
 子画面のモーダル表示のやり方と、注意すべきことについて学びました。次の章ではモードレス表示の場合について学びます。
+
+[→ 第8章 一緒にやろう](08-work-together.md)  
