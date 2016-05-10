@@ -48,7 +48,7 @@
 
 ## モーダル表示
 
-子画面をモーダル表示するには、対象となる画面のFormクラスのインスタンスを作成し、そのShowDialogメソッドを呼び出します（リスト7-1）。このとき、FormクラスはIDisposableインターフェースを実装しているので、using構文を使って必ずDisposeが呼ばれるようにしてください。
+子画面をモーダル表示するには、対象となる画面のフォームクラスのインスタンスを作成し、そのShowDialogメソッドを呼び出します（リスト7-1）。このとき、FormクラスはIDisposableインターフェースを実装しているので、using構文を使って必ずDisposeが呼ばれるようにしてください。
 
 リスト7-1 モーダル表示（`MainForm.cs`の商品検索ボタンクリックハンドラーより）
 
@@ -179,3 +179,4 @@ searchProductDialog.productCodeTextBox.Text = this.productCodeTextBox.Text;
 子画面のモーダル表示のやり方と、注意すべきことについて学びました。次の章ではモードレス表示の場合について学びます。
 
 [→ 第8章 一緒にやろう](08-work-together.md)  
+
