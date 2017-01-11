@@ -436,9 +436,9 @@ BorderStyleプロパティは`System.Windows.Forms.BorderStyle`列挙体で、�
 
 Excelスプレッドシートのような、グリッド形式でのデータ表示、入力をおこなうためのコントロールです（図4-28）。グリッドのセルにはテキスト以外にも、チェックボックスやボタン、ドロップダウンリストなどを使うこともできます。
 
-![DataGrodVoewコントロール](../image/04-28.jpg)
+![DataGrodViewコントロール](../image/04-28.jpg)
 
-図4-28 Panelコントロール
+図4-28 DataGridViewコントロール
 
 ##### 列の編集
 
