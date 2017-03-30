@@ -43,5 +43,17 @@ RDBMSの操作、ファイル操作、Webアクセス等の外部サービスと
 各章のサンプルコードは、`src`フォルダーの下にある章番号フォルダーの中にあります。リポジトリ全体をzipファイル等でダウンロードして展開後、Visual Studioでソリューションを開いて内容を確認してください。
 
 ## 参考資料
-
-- （順次追加予定）
+- [Visual C# と Visual Basic の概要](https://msdn.microsoft.com/ja-jp/library/dd492171.aspx)
+- [プレゼンテーションとドメインの分離](http://bliki-ja.github.io/PresentationDomainSeparation/)
+- [Windows フォームでのデータ バインド](https://msdn.microsoft.com/ja-jp/library/ef2xyb33.aspx)
+- [双方向データバインドによる単体入力エラーチェック – とあるコンサルタントのつぶやき](https://blogs.msdn.microsoft.com/nakama/2009/02/26/383/)
+    - [Part 1. 双方向データバインドの基本的な使い方](https://blogs.msdn.microsoft.com/nakama/2009/02/26/part-1-2/)
+    - [Part 2. スマートクライアントにおける単体入力データ検証](https://blogs.msdn.microsoft.com/nakama/2009/02/26/part-2-2/)
+- [エラーチェックの体系的な分類と実装パターン – とあるコンサルタントのつぶやき](https://blogs.msdn.microsoft.com/nakama/2009/09/28/303/)
+    - [Part 1. エラーチェックの体系的な分類方法](https://blogs.msdn.microsoft.com/nakama/2009/09/28/293/)
+    - [Part 2. 単体入力エラーチェックの実装パターン](https://blogs.msdn.microsoft.com/nakama/2009/09/28/283/)
+- .NETの例外処理 – とあるコンサルタントのつぶやき
+    - [Part.1](https://blogs.msdn.microsoft.com/nakama/2008/12/29/net-part-1/)
+    - [Part.2](https://blogs.msdn.microsoft.com/nakama/2009/01/02/net-part-2/)
+    - [Part.3](https://blogs.msdn.microsoft.com/nakama/2009/01/18/net-part-3/)
+    - [Part.4](https://blogs.msdn.microsoft.com/nakama/2009/01/23/net-part-4/)
