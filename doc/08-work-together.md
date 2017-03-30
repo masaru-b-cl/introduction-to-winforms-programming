@@ -108,6 +108,59 @@ public Product Product
 
 具体的なコードについては省きますが、循環参照にならないようにするテクニックとして覚えておいてください。
 
+## データバインドでの解決
+
+データバインドを使って親子画面の選択データを同期することもできます。それには、親画面とBindingSourceコンポーネントを子画面と共有する必要があります。
+
+まず、子画面に親画面と同じようにProduct型を扱うBindingSourceコンポーネントを追加してやります。これは親画面のフォームデザイナーでproductBindingSourceをコピーして、子画面のフォームデザイナーで貼り付ければ簡単です（図8-3）。
+
+![子画面にBindingSourceコンポーネント追加](../image/08-03.jpg)
+
+図8-3 子画面にBindingSourceコンポーネント追加
+
+次に、BindingSource型の引数を受け取るコンストラクターを追加し、**コードで**データバインドを指定してやります。これはデザイナーでデータバインドを行っても、それは子画面側で自動で作られたBindingSource型インスタンスに対してのデータバインド設定になってしまい、意味がないためです（リスト8-5）。
+
+リスト8-5 コンストラクターでBindingSourceインスタンスを受け取る（`ProductForm.cs`より）
+
+```csharp
+public ProductForm(BindingSource productBindingSource) : this()
+{
+    this.productBindingSource = productBindingSource;
+
+    // データバインド設定
+    // ※Bindingインスタンス作成時の引数は次の通り
+    // 　1. コントロールのバインド対象プロパティ名
+    //   2. バインドするデータソースオブジェクト
+    //   3. データオブジェクトのバインド対象プロパティ名
+    //   4. 書式指定有無（trueならあり）
+    productCodeTextBox.DataBindings.Add(
+        new Binding("Text", productBindingSource, nameof(Product.Code), false));
+    productNameTextBox.DataBindings.Add(
+        new Binding("Text", productBindingSource, nameof(Product.Name), false));
+    makerNameTextBox.DataBindings.Add(
+        new Binding("Text", productBindingSource, nameof(Product.MakerName), false));
+}
+```
+
+あとは、親画面で子画面のインスタンスを作る際、引数に親画面のproductBindingSourceを渡してやればOKです（リスト8-6）。
+
+リスト8-6 コンストラクターでBindingSourceインスタンスを渡す（`MainForm.cs`より）
+
+```csharp
+private void MainForm_Load(object sender, EventArgs e)
+{
+    productForm = new ProductForm(productBindingSource) // <-ここで渡す
+    {
+        StartPosition = FormStartPosition.Manual,
+        Left = this.Left + this.Width + 20,
+        Top = this.Top
+    };
+
+    FilterProducts(productNameTextBox.Text);
+}
+```
+
+詳しくはサンプルのBrowseProduct-DataBindを参照してみてください。
 
 ## 最後に
 
