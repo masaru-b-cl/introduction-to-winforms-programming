@@ -583,7 +583,7 @@ private void dataGridView1_CellContentClick(object sender, DataGridViewCellEvent
 }
 ```
 
-CellContentClickイベントは「セルの内部要素をクリック」したタイミングで発生します。したがって、ボタン以外のセルをクリックしたときでもイベント自体は発生します。ですので、イベント引数（DataGridViewCellEventArgs型）のColumnIndex（絡むインデックス）プロパティ（int型）、RowIndex（ロウインデックス）プロパティ（int型）を使い、ボタンのセルかどうかを判定してから、処理を行う必要があります。
+CellContentClickイベントは「セルの内部要素をクリック」したタイミングで発生します。したがって、ボタン以外のセルをクリックしたときでもイベント自体は発生します。ですので、イベント引数（DataGridViewCellEventArgs型）のColumnIndex（カラムインデックス）プロパティ（int型）、RowIndex（ロウインデックス）プロパティ（int型）を使い、ボタンのセルかどうかを判定してから、処理を行う必要があります。
 
 この考えはDataGridViewコントロールの他のイベントでも同様です。処理対象の列、行であるかを判定してから処理を行うということを忘れないでください。
 
